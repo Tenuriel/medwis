@@ -75,6 +75,7 @@ public class GUI {
         radContainer.add(radbut);
         group.setSelected(radbut.getModel(), true);
         radbut = new JRadioButton("w");
+        group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
 
@@ -121,6 +122,7 @@ public class GUI {
         radContainer.add(radbut);
         group.setSelected(radbut.getModel(), true);
         radbut = new JRadioButton("nein");
+        group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
@@ -202,6 +204,7 @@ public class GUI {
         radContainer.add(radbut);
         group.setSelected(radbut.getModel(), true);
         radbut = new JRadioButton("nein");
+        group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
@@ -223,6 +226,7 @@ public class GUI {
         radContainer.add(radbut);
         group.setSelected(radbut.getModel(), true);
         radbut = new JRadioButton("nein");
+        group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
@@ -244,6 +248,7 @@ public class GUI {
         radContainer.add(radbut);
         group.setSelected(radbut.getModel(), true);
         radbut = new JRadioButton("nein");
+        group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
