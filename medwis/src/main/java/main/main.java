@@ -15,5 +15,7 @@ public class main {
         LuceneHandler lh=new LuceneHandler();
         GUI gui=new GUI(lh);
         lh.gui=gui;
+        // call Similarity so it's initialized (for developement purposes)
+        Similarity.compute(null, null);
     }
 }
