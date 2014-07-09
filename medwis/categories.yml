@@ -1,61 +1,61 @@
 Geschlecht:
-   type: binary
-   w_value: null
+   type: "binary"
+   f_value: null
    m_value: null
 Herzfrequenz:
-   type: gauss
-   w_value: 3.8266
-   m_value: 3.8266
+   type: "gauss"
+   f_value: "3.8266"
+   m_value: "3.8266"
 Blutdruck_systolisch:
-   type: gauss
-   w_value: 2.55107
-   m_value: 2.55107
+   type: "gauss"
+   f_value: "2.55107"
+   m_value: "2.55107"
 Blutdruck_diastolisch:
-   type: gauss
-   w_value: 1.27553
-   m_value: 1.27553
+   type: "gauss"
+   f_value: "1.27553"
+   m_value: "1.27553"
 Herzrhytmus:
-   type: binary
-   w_value: null
+   type: "binary"
+   f_value: null
    m_value: null
 Leukozythen:
-   type: gauss
-   w_value: 1.53064
-   m_value: 1.53064
+   type: "gauss"
+   f_value: "1.53064"
+   m_value: "1.53064"
 Haematokrit:
-   type: gauss
-   w_value: 0.0357149
-   m_value: 0.0306128
+   type: "gauss"
+   f_value: "0.0357149"
+   m_value: "0.0306128"
 Harnsaeure:
-   type: gauss
-   w_value: 1.6837
-   m_value: 1.83677
+   type: "gauss"
+   f_value: "1.6837"
+   m_value: "1.83677"
 Schmerz:
-   type: matrix
-   w_value: ort_similarity.csv
-   m_value: ort_similarity.csv
+   type: "matrix"
+   f_value: "ort_similarity.csv"
+   m_value: "ort_similarity.csv"
 Juckreiz:
-   type: matrix
-   w_value: ort_similarity.csv
-   m_value: ort_similarity.csv
+   type: "matrix"
+   f_value: "ort_similarity.csv"
+   m_value: "ort_similarity.csv"
 Uebelkeit:
-   type: binary
-   w_value: null
+   type: "binary"
+   f_value: null
    m_value: null
 Durchfall:
-   type: binary
-   w_value: null
+   type: "binary"
+   f_value: null
    m_value: null
 Verstopfung:
-   type: binary
-   w_value: null
+   type: "binary"
+   f_value: null
    m_value: null
 Temperatur:
-   type: gauss
-   w_value: 0.367354
-   m_value: 0.367354
+   type: "gauss"
+   f_value: "0.367354"
+   m_value: "0.367354"
 Gewicht:
-   type: gauss
-   w_value: 3.18883
-   m_value: 3.18883
+   type: "gauss"
+   f_value: "3.18883"
+   m_value: "3.18883"
 #Alter:
