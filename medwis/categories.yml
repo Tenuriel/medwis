@@ -3,11 +3,6 @@ Geschlecht:
    type: "binary"
    f_value: null
    m_value: null
-Herzfrequenz:
-   weight: "1"
-   type: "gauss"
-   f_value: "3.8266"
-   m_value: "3.8266"
 Blutdruck_systolisch:
    weight: "1"
    type: "gauss"
@@ -18,6 +13,11 @@ Blutdruck_diastolisch:
    type: "gauss"
    f_value: "1.27553"
    m_value: "1.27553"
+Herzfrequenz:
+   weight: "1"
+   type: "gauss"
+   f_value: "3.8266"
+   m_value: "3.8266"
 Herzrhytmus:
    weight: "1"
    type: "binary"

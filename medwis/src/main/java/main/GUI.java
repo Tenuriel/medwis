@@ -35,29 +35,25 @@ public class GUI {
      * the number of elements in one gridrow of the core-panel.
      */
     public static final int ELEMENTS_ROW = 4;
+    /**
+     * console output of the programm.
+     */
     public static JTextArea console;
+    /**
+     * mainframe.
+     */
     public JFrame frame;
-    public JTextField lucenefield;
     public ArrayList<JComponent> inputfields;
 
-    public GUI(LuceneHandler lh) {
+    public GUI(DataHandler lh) {
         inputfields = new ArrayList<>();
         frame = new JFrame("CBR");
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JPanel lucenep = new JPanel(new GridLayout(1, 2));
-        lucenefield = new JTextField();
-        lucenefield.setPreferredSize(FIELD_SIZE);
-        lucenep.add(lucenefield);
-        JButton b = new JButton("create Index");
-        b.addActionListener(lh);
-        lucenep.add(b);
-
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = ELEMENTS_ROW;
-        frame.add(lucenep, c);
+
 
         //input fields and radio buttons
         JPanel core = new JPanel(new GridBagLayout());
@@ -84,13 +80,13 @@ public class GUI {
         core.add(radContainer, c);
         
         //herz
-        label=new JLabel("Herz");
+        label=new JLabel("Herzfrequenz");
         label.setPreferredSize(FIELD_SIZE);
         c.gridx=0;
         c.gridy=1;
         core.add(label,c);
         JTextField inputfield=new JTextField();
-        inputfield.setName("Herz");
+        inputfield.setName("Herzfrequenz");
         inputfield.setPreferredSize(FIELD_SIZE);
         inputfields.add(inputfield);
         c.gridx=1;
@@ -102,7 +98,7 @@ public class GUI {
         c.gridx=2;
         c.gridy=0;
         core.add(label,c);
-        inputfield=new JTextField();
+        inputfield=new JTextField("0/0");
         inputfield.setName("Blutdruck");
         inputfield.setPreferredSize(FIELD_SIZE);
         inputfields.add(inputfield);
@@ -133,39 +129,39 @@ public class GUI {
         core.add(radContainer, c);
         
         //Leutozythen
-        label=new JLabel("Leutozythen");
+        label=new JLabel("Leukozythen");
         label.setPreferredSize(FIELD_SIZE);
         c.gridx=0;
         c.gridy=2;
         core.add(label,c);
         inputfield=new JTextField();
-        inputfield.setName("Leutozythen");
+        inputfield.setName("Leukozythen");
         inputfield.setPreferredSize(FIELD_SIZE);
         inputfields.add(inputfield);
         c.gridx++;
         core.add(inputfield,c);
         
-        //Hämatokrit
-        label=new JLabel("Hämatokrit");
+        //Haematokrit
+        label=new JLabel("Haematokrit");
         label.setPreferredSize(FIELD_SIZE);
         c.gridx=2;
         c.gridy=2;
         core.add(label,c);
         inputfield=new JTextField();
-        inputfield.setName("Hämatokrit");
+        inputfield.setName("Haematokrit");
         inputfield.setPreferredSize(FIELD_SIZE);
         inputfields.add(inputfield);
         c.gridx++;
         core.add(inputfield,c);
         
-        //Harnsäure
-        label=new JLabel("Harnsäure");
+        //Harnsaeure
+        label=new JLabel("Harnsaeure");
         label.setPreferredSize(FIELD_SIZE);
         c.gridx=0;
         c.gridy=3;
         core.add(label,c);
         inputfield=new JTextField();
-        inputfield.setName("Harnsäure");
+        inputfield.setName("Harnsaeure");
         inputfield.setPreferredSize(FIELD_SIZE);
         inputfields.add(inputfield);
         c.gridx++;
@@ -197,8 +193,8 @@ public class GUI {
         c.gridx++;
         core.add(inputfield,c);
         
-        //Übelkeit
-        label = new JLabel("Übelkeit");
+        //uebelkeit
+        label = new JLabel("Uebelkeit");
         label.setPreferredSize(FIELD_SIZE);
         c.gridx=2;
         c.gridy=4;
@@ -208,12 +204,12 @@ public class GUI {
         radContainer=new JPanel(new GridLayout(1, 2));
         radContainer.setPreferredSize(FIELD_SIZE);
         radbut = new JRadioButton("ja", true);
-        radbut.setName("Übelkeit");
+        radbut.setName("Uebelkeit");
         inputfields.add(radbut);
         group.add(radbut);
         radContainer.add(radbut);
         radbut = new JRadioButton("nein");
-        radbut.setName("Übelkeit");
+        radbut.setName("Uebelkeit");
         group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
