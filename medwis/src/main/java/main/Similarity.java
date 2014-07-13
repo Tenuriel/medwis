@@ -1,5 +1,6 @@
 package main;
 
+import au.com.bytecode.opencsv.CSVReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -12,7 +13,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import org.yaml.snakeyaml.Yaml;
-import au.com.bytecode.opencsv.CSVReader;
 
 /**
  *
@@ -71,8 +71,29 @@ public class Similarity {
     * @return Similarity of the cases.
     */
    public static float compute(HashMap<String, String> inputCase, HashMap<String, String> storedCase) {
-      //TODO
-      return 0;
+      float numValues = (float) 0;
+        boolean isFemale = false;
+        Iterator<Entry<String, String>> it = inputCase.entrySet().iterator();
+        while (it.hasNext()) {
+            Entry<String, String> pairs = (Entry)it.next();
+            if(pairs.getKey().equals("Geschlecht")){
+                if(pairs.getValue().equals("f")) {
+                    isFemale = true;
+                    break;
+                }
+            }
+        }
+        float result = (float) 0;
+        it = inputCase.entrySet().iterator();
+        while (it.hasNext()) {
+            Entry<String, String> pairs = (Entry)it.next();
+            if(!pairs.getKey().equals("Geschlecht")){
+                result = result + (1 * Similarity.getSimilarityOf(isFemale, pairs.getKey(), 
+                        pairs.getValue(), storedCase.get(pairs.getKey())));
+                numValues = numValues + 1;
+            }
+        }
+        return (float) (result/numValues);
    }
 
    /**
@@ -110,8 +131,13 @@ public class Similarity {
     * @return The similarity of the two values.
     */
    private static float getGaussSimilarity(boolean isFemale, String categoryName, String inputValue, String storedValue) {
-      //TODO
-      return 0;
+      float deviation = (isFemale)
+         ? Similarity.standardDeviationsFemale.get(categoryName)
+         : Similarity.standardDeviationsMale.get(categoryName);
+      return (float) Math.exp(
+              -Math.pow( Float.parseFloat(inputValue) - Float.parseFloat(storedValue), 2 ) /
+              ( 2 * Math.pow(deviation, 2) )
+      );
    }
 
    /**
