@@ -78,26 +78,28 @@ public class Similarity {
     * @return Similarity of the cases.
     */
    public static float compute(boolean isFemale, HashMap<String, String> inputCase, HashMap<String, String> storedCase) {
-      float numValues = 0;
+      float sumWeights = 0;
       float result = 0;
-      float weight = 1;
 
       Iterator<Entry<String, String>> iterator = inputCase.entrySet().iterator();
 
       Entry<String, String> inputCategory;
       String categoryName;
+      float weight;
+      
       while (iterator.hasNext()) {
          inputCategory = iterator.next();
          categoryName = inputCategory.getKey();
+         weight = Similarity.weights.get(categoryName);
+         
 
-         result += Similarity.weights.get(categoryName) *
-                 Similarity.getSimilarityOf(
+         result += weight * Similarity.getSimilarityOf(
                  isFemale, categoryName, inputCategory.getValue(), storedCase.get(categoryName)
          );
 
-         numValues++;
+         sumWeights += weight;
       }
-      return result / numValues;
+      return result / sumWeights;
    }
 
    /**
