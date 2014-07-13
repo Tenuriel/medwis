@@ -24,6 +24,11 @@ public class Similarity {
     * Maps every category to its similarity computing type.
     */
    private static HashMap<String, String> types;
+   
+   /**
+    * Maps every category to its weight.
+    */
+   private static HashMap<String, Float> weights;
 
    /**
     * Maps every category of type "gauss" to its male standard deviation.
@@ -47,6 +52,7 @@ public class Similarity {
 
    static {
       Similarity.types = new HashMap<>();
+      Similarity.weights = new HashMap<>();
       Similarity.standardDeviationsFemale = new HashMap<>();
       Similarity.standardDeviationsMale = new HashMap<>();
       Similarity.matricesFemale = new HashMap<>();
@@ -66,34 +72,32 @@ public class Similarity {
    /**
     * Computes the similarity of two cases.
     *
+    * @param isFemale Specifies whether the input case is female.
     * @param inputCase Case as provided by the user.
     * @param storedCase Case from the data-basis to compare.
     * @return Similarity of the cases.
     */
-   public static float compute(HashMap<String, String> inputCase, HashMap<String, String> storedCase) {
-      float numValues = (float) 0;
-        boolean isFemale = false;
-        Iterator<Entry<String, String>> it = inputCase.entrySet().iterator();
-        while (it.hasNext()) {
-            Entry<String, String> pairs = (Entry)it.next();
-            if(pairs.getKey().equals("Geschlecht")){
-                if(pairs.getValue().equals("f")) {
-                    isFemale = true;
-                    break;
-                }
-            }
-        }
-        float result = (float) 0;
-        it = inputCase.entrySet().iterator();
-        while (it.hasNext()) {
-            Entry<String, String> pairs = (Entry)it.next();
-            if(!pairs.getKey().equals("Geschlecht")){
-                result = result + (1 * Similarity.getSimilarityOf(isFemale, pairs.getKey(), 
-                        pairs.getValue(), storedCase.get(pairs.getKey())));
-                numValues = numValues + 1;
-            }
-        }
-        return (float) (result/numValues);
+   public static float compute(boolean isFemale, HashMap<String, String> inputCase, HashMap<String, String> storedCase) {
+      float numValues = 0;
+      float result = 0;
+      float weight = 1;
+
+      Iterator<Entry<String, String>> iterator = inputCase.entrySet().iterator();
+
+      Entry<String, String> inputCategory;
+      String categoryName;
+      while (iterator.hasNext()) {
+         inputCategory = iterator.next();
+         categoryName = inputCategory.getKey();
+
+         result += Similarity.weights.get(categoryName) *
+                 Similarity.getSimilarityOf(
+                 isFemale, categoryName, inputCategory.getValue(), storedCase.get(categoryName)
+         );
+
+         numValues++;
+      }
+      return result / numValues;
    }
 
    /**
@@ -183,20 +187,22 @@ public class Similarity {
 
       while (iterator.hasNext()) {
          Entry<String, LinkedHashMap<String, Object>> entry = iterator.next();
-         String category = entry.getKey();
+         LinkedHashMap<String, Object> category = entry.getValue();
+         String categoryName = entry.getKey();
 
-         String type = (String) entry.getValue().get("type");
-         String valueFemale = (String) entry.getValue().get("f_value");
-         String valueMale = (String) entry.getValue().get("m_value");
+         String type = (String) category.get("type");
+         String valueFemale = (String) category.get("f_value");
+         String valueMale = (String) category.get("m_value");
 
-         Similarity.types.put(category, type);
+         Similarity.types.put(categoryName, type);
+         Similarity.weights.put(categoryName, new Float((String) category.get("weight")));
 
          if (type.equals("gauss")) {
-            Similarity.standardDeviationsFemale.put(category, new Float(valueFemale));
-            Similarity.standardDeviationsMale.put(category, new Float(valueMale));
+            Similarity.standardDeviationsFemale.put(categoryName, new Float(valueFemale));
+            Similarity.standardDeviationsMale.put(categoryName, new Float(valueMale));
          } else if (type.equals("matrix")) {
-            Similarity.matricesFemale.put(category, new Similarity.Matrix(valueFemale));
-            Similarity.matricesMale.put(category, new Similarity.Matrix(valueMale));
+            Similarity.matricesFemale.put(categoryName, new Similarity.Matrix(valueFemale));
+            Similarity.matricesMale.put(categoryName, new Similarity.Matrix(valueMale));
          }
       }
    }
