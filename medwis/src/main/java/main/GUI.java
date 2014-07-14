@@ -334,7 +334,7 @@ public class GUI {
         console = new JTextArea("Programmausgabe :\n");
         console.setEditable(false);
         JScrollPane conPane = new JScrollPane(console);
-        conPane.setPreferredSize(new Dimension(FIELD_SIZE.width * ELEMENTS_ROW, 80));
+        conPane.setPreferredSize(new Dimension(FIELD_SIZE.width * ELEMENTS_ROW, 150));
         c.gridx = 0;
         c.gridwidth = ELEMENTS_ROW;
         c.gridy = 2;

@@ -55,6 +55,7 @@ public class DataHandler implements ActionListener {
     }
 
     public void displayResults() {
+        GUI.console.setText("Programmausgabe :\n");
         ArrayList<HashMap<String, String>> cases = evaluateCase();
         for (HashMap<String, String> h : cases) {
             for (Map.Entry<String, String> e : h.entrySet()) {
