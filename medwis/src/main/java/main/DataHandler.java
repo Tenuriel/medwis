@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import javax.swing.JComponent;
 import javax.swing.JRadioButton;
@@ -53,6 +54,16 @@ public class DataHandler implements ActionListener {
     public DataHandler() {
     }
 
+    public void displayResults() {
+        ArrayList<HashMap<String, String>> cases = evaluateCase();
+        for (HashMap<String, String> h : cases) {
+            for (Map.Entry<String, String> e : h.entrySet()) {
+                GUI.console.append(e.getKey() + ":" + e.getValue()+"   ");
+            }
+            GUI.console.append("\n");
+        }
+    }
+
     /**
      * collects the input and returns a hashmap with <Criteria,Value>.
      *
@@ -62,23 +73,28 @@ public class DataHandler implements ActionListener {
         HashMap<String, String> map = new HashMap<>();
         for (JComponent c : gui.inputfields) {
             if (c instanceof JTextField) {
-                if (c.getName().equals("Blutdruck")) {
-                    if (((JTextField) c).getText().isEmpty()) {
-                        ((JTextField) c).setText("120/80");
-                    }
-                    String[] tmp = ((JTextField) c).getText().split("/");
-                    map.put("Blutdruck_systolisch", tmp[0]);
-                    map.put("Blutdruck_diastolisch", tmp[1]);
-                } else if (c.getName().equals("Juckreiz") || c.getName().equals("Schmerz")) {
-                    if (((JTextField) c).getText().isEmpty() || !orte.contains(((JTextField) c).getText())) {
-                        ((JTextField) c).setText("Nein");
-                    }
-                    map.put(c.getName(), ((JTextField) c).getText());
-                } else {
-                    if (((JTextField) c).getText().isEmpty()) {
-                        ((JTextField) c).setText("0");
-                    }
-                    map.put(c.getName(), ((JTextField) c).getText());
+                switch (c.getName()) {
+                    case "Blutdruck":
+                        if (((JTextField) c).getText().isEmpty()) {
+                            continue;
+                        }
+                        String[] tmp = ((JTextField) c).getText().split("/");
+                        map.put("Blutdruck_systolisch", tmp[0]);
+                        map.put("Blutdruck_diastolisch", tmp[1]);
+                        break;
+                    case "Juckreiz":
+                    case "Schmerz":
+                        if (((JTextField) c).getText().isEmpty() || !orte.contains(((JTextField) c).getText())) {
+                            continue;
+                        }
+                        map.put(c.getName(), ((JTextField) c).getText());
+                        break;
+                    default:
+                        if (((JTextField) c).getText().isEmpty()) {
+                            continue;
+                        }
+                        map.put(c.getName(), ((JTextField) c).getText());
+                        break;
                 }
             } else if (c instanceof JRadioButton && ((JRadioButton) c).isSelected()) {
                 map.put(c.getName(), ((JRadioButton) c).getText());
@@ -162,10 +178,10 @@ public class DataHandler implements ActionListener {
             result.add(dataCase);
         } else {
             HashMap<String, String> e;
-            for (int x=0;x<result.size();x++) {
-                e=result.get(x);
+            for (int x = 0; x < result.size(); x++) {
+                e = result.get(x);
                 if (Float.valueOf(e.get("score")) < Float.valueOf(dataCase.get("score"))) {
-                    result.add(result.indexOf(e), dataCase);            
+                    result.add(result.indexOf(e), dataCase);
                     if (result.size() >= resultNumber) {
                         result.remove(result.size() - 1);
                     }
@@ -177,5 +193,6 @@ public class DataHandler implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        displayResults();
     }
 }

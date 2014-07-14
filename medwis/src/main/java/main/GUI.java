@@ -53,7 +53,10 @@ public class GUI {
 
         c.gridx = 0;
         c.gridy = 0;
-
+        JButton search=new JButton("Search");
+        search.setPreferredSize(FIELD_SIZE);
+        search.addActionListener(lh);
+        frame.add(search,c);
 
         //input fields and radio buttons
         JPanel core = new JPanel(new GridBagLayout());
@@ -98,7 +101,7 @@ public class GUI {
         c.gridx=2;
         c.gridy=0;
         core.add(label,c);
-        inputfield=new JTextField("0/0");
+        inputfield=new JTextField("");
         inputfield.setName("Blutdruck");
         inputfield.setPreferredSize(FIELD_SIZE);
         inputfields.add(inputfield);
