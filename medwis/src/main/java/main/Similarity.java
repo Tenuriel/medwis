@@ -3,6 +3,7 @@ package main;
 import au.com.bytecode.opencsv.CSVReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,7 +78,8 @@ public class Similarity {
     * @param storedCase Case from the data-basis to compare.
     * @return Similarity of the cases.
     */
-   public static float compute(boolean isFemale, HashMap<String, String> inputCase, HashMap<String, String> storedCase) {
+   public static float compute(boolean isFemale, HashMap<String, String> inputCase, HashMap<String, String> storedCase) 
+   throws IllegalArgumentException {
       float sumWeights = 0;
       float result = 0;
 
@@ -95,9 +97,15 @@ public class Similarity {
          if(inputCategory.getValue().isEmpty()){
              inputCategory.setValue("0");
          }
-         result += weight * Similarity.getSimilarityOf(
-                 isFemale, categoryName, inputCategory.getValue(), storedCase.get(categoryName)
-         );
+         
+         try {
+            result += weight * Similarity.getSimilarityOf(
+                    isFemale, categoryName, inputCategory.getValue(), storedCase.get(categoryName)
+            );
+         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Invlaid value '"
+                    + inputCategory.getValue() + "' for category '" + categoryName + "'.");
+         }
 
          sumWeights += weight;
       }
@@ -113,7 +121,8 @@ public class Similarity {
     * @param storedValue The value of the case from the data-basis.
     * @return The similarity of the two values.
     */
-   private static float getSimilarityOf(boolean isFemale, String categoryName, String inputValue, String storedValue) {
+   private static float getSimilarityOf(boolean isFemale, String categoryName, String inputValue, String storedValue)
+      throws NumberFormatException, ArrayIndexOutOfBoundsException {
       String type = Similarity.types.get(categoryName);
       float similarity = 0;
 
@@ -138,7 +147,8 @@ public class Similarity {
     * @param storedValue The value of the case from the data-basis.
     * @return The similarity of the two values.
     */
-   private static float getGaussSimilarity(boolean isFemale, String categoryName, String inputValue, String storedValue) {
+   private static float getGaussSimilarity(boolean isFemale, String categoryName, String inputValue, String storedValue)
+      throws NumberFormatException {
       float deviation = (isFemale)
          ? Similarity.standardDeviationsFemale.get(categoryName)
          : Similarity.standardDeviationsMale.get(categoryName);
@@ -158,7 +168,8 @@ public class Similarity {
     * @param storedValue The value of the case from the data-basis.
     * @return The similarity of the two values.
     */
-   private static float getMatrixSimilarity(boolean isFemale, String categoryName, String inputValue, String storedValue) {
+   private static float getMatrixSimilarity(boolean isFemale, String categoryName, String inputValue, String storedValue)
+      throws ArrayIndexOutOfBoundsException {
       return (isFemale)
               ? Similarity.matricesFemale.get(categoryName).get(inputValue, storedValue)
               : Similarity.matricesMale.get(categoryName).get(inputValue, storedValue);
@@ -258,7 +269,7 @@ public class Similarity {
        * @return The similarity of the two categories as given by this
        * similarity matrix.
        */
-      public float get(String firstCategory, String secondCategory) {
+      public float get(String firstCategory, String secondCategory) throws ArrayIndexOutOfBoundsException {
          return this.values[this.categories.indexOf(firstCategory)][this.categories.indexOf(secondCategory)];
       }
    }
