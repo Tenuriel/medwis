@@ -96,7 +96,7 @@ public class DataHandler implements ActionListener {
                         map.put(c.getName(), ((JTextField) c).getText());
                         break;
                 }
-            } else if (c instanceof JRadioButton && ((JRadioButton) c).isSelected()) {
+            } else if (c instanceof JRadioButton && ((JRadioButton) c).isSelected()&&!c.getName().equals("k.A.")) {
                 map.put(c.getName(), ((JRadioButton) c).getText());
             }
         }

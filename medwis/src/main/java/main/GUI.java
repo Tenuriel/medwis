@@ -66,7 +66,7 @@ public class GUI {
         core.add(label, c);
 
         ButtonGroup group = new ButtonGroup();
-        JPanel radContainer=new JPanel(new GridLayout(1, 2));
+        JPanel radContainer=new JPanel(new GridLayout(1, 3));
         radContainer.setPreferredSize(FIELD_SIZE);
         JRadioButton radbut = new JRadioButton("m",true);
         radbut.setName("Geschlecht");
@@ -78,7 +78,8 @@ public class GUI {
         group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
-
+        
+        
         c.gridx = 1;
         core.add(radContainer, c);
         
@@ -116,9 +117,9 @@ public class GUI {
         core.add(label, c);
 
         group = new ButtonGroup();
-        radContainer=new JPanel(new GridLayout(1, 2));
+        radContainer=new JPanel(new GridLayout(1, 3));
         radContainer.setPreferredSize(FIELD_SIZE);
-        radbut = new JRadioButton("regelmäßig",true);
+        radbut = new JRadioButton("regelmäßig");
         radbut.setName("Herzrhytmus");
         inputfields.add(radbut);
         group.add(radbut);
@@ -129,6 +130,11 @@ public class GUI {
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
+        radbut = new JRadioButton("k.A.",true);
+        radbut.setName("k.A.");
+        inputfields.add(radbut);
+        group.add(radbut);
+        radContainer.add(radbut);
         core.add(radContainer, c);
         
         //Leutozythen
@@ -204,9 +210,9 @@ public class GUI {
         core.add(label, c);
 
         group = new ButtonGroup();
-        radContainer=new JPanel(new GridLayout(1, 2));
+        radContainer=new JPanel(new GridLayout(1, 3));
         radContainer.setPreferredSize(FIELD_SIZE);
-        radbut = new JRadioButton("ja", true);
+        radbut = new JRadioButton("ja");
         radbut.setName("Uebelkeit");
         inputfields.add(radbut);
         group.add(radbut);
@@ -217,6 +223,11 @@ public class GUI {
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
+        radbut = new JRadioButton("k.A.",true);
+        radbut.setName("k.A.");
+        inputfields.add(radbut);
+        group.add(radbut);
+        radContainer.add(radbut);
         core.add(radContainer, c);
         
         //Druchfall
@@ -227,9 +238,9 @@ public class GUI {
         core.add(label, c);
 
         group = new ButtonGroup();
-        radContainer=new JPanel(new GridLayout(1, 2));
+        radContainer=new JPanel(new GridLayout(1, 3));
         radContainer.setPreferredSize(FIELD_SIZE);
-        radbut = new JRadioButton("ja", true);
+        radbut = new JRadioButton("ja");
         radbut.setName("Durchfall");
         inputfields.add(radbut);
         group.add(radbut);
@@ -240,6 +251,11 @@ public class GUI {
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
+        radbut = new JRadioButton("k.A.",true);
+        radbut.setName("k.A.");
+        inputfields.add(radbut);
+        group.add(radbut);
+        radContainer.add(radbut);
         core.add(radContainer, c);
         
         //Verstopfung
@@ -250,9 +266,9 @@ public class GUI {
         core.add(label, c);
 
         group = new ButtonGroup();
-        radContainer=new JPanel(new GridLayout(1, 2));
+        radContainer=new JPanel(new GridLayout(1, 3));
         radContainer.setPreferredSize(FIELD_SIZE);
-        radbut = new JRadioButton("ja", true);
+        radbut = new JRadioButton("ja");
         radbut.setName("Verstopfung");
         inputfields.add(radbut);
         group.add(radbut);
@@ -263,6 +279,11 @@ public class GUI {
         inputfields.add(radbut);
         radContainer.add(radbut);
         c.gridx++;
+        radbut = new JRadioButton("k.A.",true);
+        radbut.setName("k.A.");
+        inputfields.add(radbut);
+        group.add(radbut);
+        radContainer.add(radbut);
         core.add(radContainer, c);
         
              

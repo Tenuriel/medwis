@@ -15,7 +15,7 @@ public class main {
         DataHandler lh=new DataHandler();
         GUI gui=new GUI(lh);
         lh.gui=gui;
-        lh.evaluateCase();
+//        lh.evaluateCase();
         // call Similarity so it's initialized (for developement purposes)
 //        Similarity.compute(false, null, null);
     }
