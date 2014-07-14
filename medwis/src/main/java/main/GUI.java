@@ -30,7 +30,7 @@ public class GUI {
     /**
      * the dimension of every inputfield.
      */
-    public static final Dimension FIELD_SIZE = new Dimension(170, 30);
+    public static final Dimension FIELD_SIZE = new Dimension(180, 30);
     /**
      * the number of elements in one gridrow of the core-panel.
      */
