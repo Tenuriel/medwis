@@ -91,7 +91,7 @@ public class DataHandler implements ActionListener {
             scan = new Scanner(Paths.get("../data/mwiss2014_100k.tsv"));
             String[] line;
             String[] tmp;
-            int counter = 0;
+            int counter = skipCat;
             while (scan.hasNextLine()) {
                 line = scan.nextLine().split("\t");
                 for (String s : line) {
@@ -101,11 +101,15 @@ public class DataHandler implements ActionListener {
                         tmp = s.split("/");
                         dataCase.put("Blutdruck_systolisch", tmp[0]);
                         dataCase.put("Blutdruck_diastolisch", tmp[1]);
+                        continue;
                     }
                     dataCase.put(categories.get(counter), s);
                     counter++;
+                    if(counter==categories.size()){
+                        break;
+                    }
                 }
-                counter = 0;
+                counter = skipCat;
                 dataCase.put("score", String.valueOf(Similarity.compute(isFemale, inputCase, dataCase)));
                 if (result.isEmpty()
                         || Float.valueOf(result.get(result.size() - 1).get("score")) < Float.valueOf(dataCase.get("score"))) {
