@@ -10,10 +10,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -23,6 +22,23 @@ import javax.swing.JTextField;
  * @author Tim Pontzen
  */
 public class DataHandler implements ActionListener {
+
+    /**
+     * every possible place
+     */
+    public ArrayList<String> orte = new ArrayList<>(Arrays.asList(
+            "Linke Hand", "Rechte Hand",
+            "Linker Arm", "Rechter Arm",
+            "Linke Schulter", "Rechte Schulter",
+            "Nacken", "Kopf", "Brust", "Bauch",
+            "Steiß",
+            "Linker Oberschenkel", "Rechter Oberschenkel",
+            "Linkes Schienbein", "Rechtes Schienbein",
+            "Linke Wade", "Rechte Wade",
+            "Linker Fuß", "Rechter Fuß",
+            "Zeh", "Rücken", "Genital",
+            "Nein"
+    ));
 
     /**
      * number of categories to skip while reading "categories.yml".
@@ -47,10 +63,21 @@ public class DataHandler implements ActionListener {
         for (JComponent c : gui.inputfields) {
             if (c instanceof JTextField) {
                 if (c.getName().equals("Blutdruck")) {
+                    if (((JTextField) c).getText().isEmpty()) {
+                        ((JTextField) c).setText("120/80");
+                    }
                     String[] tmp = ((JTextField) c).getText().split("/");
                     map.put("Blutdruck_systolisch", tmp[0]);
                     map.put("Blutdruck_diastolisch", tmp[1]);
+                } else if (c.getName().equals("Juckreiz") || c.getName().equals("Schmerz")) {
+                    if (((JTextField) c).getText().isEmpty() || !orte.contains(((JTextField) c).getText())) {
+                        ((JTextField) c).setText("Nein");
+                    }
+                    map.put(c.getName(), ((JTextField) c).getText());
                 } else {
+                    if (((JTextField) c).getText().isEmpty()) {
+                        ((JTextField) c).setText("0");
+                    }
                     map.put(c.getName(), ((JTextField) c).getText());
                 }
             } else if (c instanceof JRadioButton && ((JRadioButton) c).isSelected()) {
@@ -105,7 +132,7 @@ public class DataHandler implements ActionListener {
                     }
                     dataCase.put(categories.get(counter), s);
                     counter++;
-                    if(counter==categories.size()){
+                    if (counter == categories.size()) {
                         break;
                     }
                 }
@@ -134,12 +161,15 @@ public class DataHandler implements ActionListener {
         if (result.isEmpty()) {
             result.add(dataCase);
         } else {
-            for (HashMap<String, String> e : result) {
+            HashMap<String, String> e;
+            for (int x=0;x<result.size();x++) {
+                e=result.get(x);
                 if (Float.valueOf(e.get("score")) < Float.valueOf(dataCase.get("score"))) {
-                    result.add(result.indexOf(e), dataCase);
+                    result.add(result.indexOf(e), dataCase);            
                     if (result.size() >= resultNumber) {
                         result.remove(result.size() - 1);
                     }
+                    break;
                 }
             }
         }

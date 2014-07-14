@@ -30,7 +30,7 @@ public class GUI {
     /**
      * the dimension of every inputfield.
      */
-    public static final Dimension FIELD_SIZE = new Dimension(120, 30);
+    public static final Dimension FIELD_SIZE = new Dimension(170, 30);
     /**
      * the number of elements in one gridrow of the core-panel.
      */
@@ -106,7 +106,7 @@ public class GUI {
         core.add(inputfield,c);
         
         //Rhythmus
-        label = new JLabel("Rhythmus regelm.");
+        label = new JLabel("Herzrhytmus");
         label.setPreferredSize(FIELD_SIZE);
         c.gridx=2;
         c.gridy=1;
@@ -115,13 +115,13 @@ public class GUI {
         group = new ButtonGroup();
         radContainer=new JPanel(new GridLayout(1, 2));
         radContainer.setPreferredSize(FIELD_SIZE);
-        radbut = new JRadioButton("ja",true);
-        radbut.setName("Rhythmus regelm.");
+        radbut = new JRadioButton("regelmäßig",true);
+        radbut.setName("Herzrhytmus");
         inputfields.add(radbut);
         group.add(radbut);
         radContainer.add(radbut);
-        radbut = new JRadioButton("nein");
-        radbut.setName("Rhythmus regelm.");
+        radbut = new JRadioButton("unregelmäßig");
+        radbut.setName("Herzrhytmus");
         group.add(radbut);
         inputfields.add(radbut);
         radContainer.add(radbut);
@@ -270,7 +270,7 @@ public class GUI {
         c.gridy=6;
         core.add(label,c);
         inputfield=new JTextField("");
-        inputfield.setName("Temeratur");
+        inputfield.setName("Temperatur");
         inputfield.setPreferredSize(FIELD_SIZE);
         inputfields.add(inputfield);
         c.gridx++;
@@ -290,17 +290,17 @@ public class GUI {
         core.add(inputfield,c);
         
         //Alter
-        label=new JLabel("Alter");
-        label.setPreferredSize(FIELD_SIZE);
-        c.gridx=0;
-        c.gridy=7;
-        core.add(label,c);
-        inputfield=new JTextField("");
-        inputfield.setName("Alter");
-        inputfield.setPreferredSize(FIELD_SIZE);
-        inputfields.add(inputfield);
-        c.gridx++;
-        core.add(inputfield,c);
+//        label=new JLabel("Alter");
+//        label.setPreferredSize(FIELD_SIZE);
+//        c.gridx=0;
+//        c.gridy=7;
+//        core.add(label,c);
+//        inputfield=new JTextField("");
+//        inputfield.setName("Alter");
+//        inputfield.setPreferredSize(FIELD_SIZE);
+//        inputfields.add(inputfield);
+//        c.gridx++;
+//        core.add(inputfield,c);
         
         
         c.gridx = 0;
