@@ -155,7 +155,7 @@ public class DataHandler implements ActionListener {
                 counter = skipCat;
                 dataCase.put("score", String.valueOf(Similarity.compute(isFemale, inputCase, dataCase)));
                 if (result.isEmpty()
-                        || Float.valueOf(result.get(result.size() - 1).get("score")) < Float.valueOf(dataCase.get("score"))) {
+                        || Float.valueOf(result.get(result.size() - 1).get("score")) <= Float.valueOf(dataCase.get("score"))) {
                     placeElement(result, dataCase);
                 }
                 dataCase = new HashMap<>();
@@ -180,7 +180,7 @@ public class DataHandler implements ActionListener {
             HashMap<String, String> e;
             for (int x = 0; x < result.size(); x++) {
                 e = result.get(x);
-                if (Float.valueOf(e.get("score")) < Float.valueOf(dataCase.get("score"))) {
+                if (Float.valueOf(e.get("score")) <= Float.valueOf(dataCase.get("score"))) {
                     result.add(result.indexOf(e), dataCase);
                     if (result.size() >= resultNumber) {
                         result.remove(result.size() - 1);

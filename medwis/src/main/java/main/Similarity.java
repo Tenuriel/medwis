@@ -109,6 +109,12 @@ public class Similarity {
 
          sumWeights += weight;
       }
+      
+      // don't divide by zero
+      if (sumWeights == 0) {
+         return 0;
+      }
+      
       return result / sumWeights;
    }
 
