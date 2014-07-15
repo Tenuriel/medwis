@@ -94,10 +94,6 @@ public class Similarity {
          categoryName = inputCategory.getKey();
          weight = Similarity.weights.get(categoryName);
          
-         if(inputCategory.getValue().isEmpty()){
-             inputCategory.setValue("0");
-         }
-         
          try {
             result += weight * Similarity.getSimilarityOf(
                     isFemale, categoryName, inputCategory.getValue(), storedCase.get(categoryName)
