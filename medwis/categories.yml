@@ -73,4 +73,8 @@ Gewicht:
    type: "gauss"
    f_value: "3.18883"
    m_value: "3.18883"
-#Alter:
+Alter:
+   weight: "0"
+   type: "binary"
+   f_value: null
+   m_value: null

@@ -3,7 +3,6 @@ package main;
 import au.com.bytecode.opencsv.CSVReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -173,8 +172,8 @@ public class Similarity {
    private static float getMatrixSimilarity(boolean isFemale, String categoryName, String inputValue, String storedValue)
       throws ArrayIndexOutOfBoundsException {
       return (isFemale)
-              ? Similarity.matricesFemale.get(categoryName).get(inputValue, storedValue)
-              : Similarity.matricesMale.get(categoryName).get(inputValue, storedValue);
+         ? Similarity.matricesFemale.get(categoryName).get(inputValue, storedValue)
+         : Similarity.matricesMale.get(categoryName).get(inputValue, storedValue);
    }
 
    /**
